@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
@@ -35,12 +36,12 @@ public class GroupChatActivity extends AppCompatActivity {
     private ImageButton sendMessage;
     private EditText userMessageInput;
     private ScrollView scrollView;
-    private TextView displayTextMessage;
+    private TextView displayTextMessage_left,displayTextMessage_right;
 
     private DatabaseReference reference,groupnameRef,GroupMessageKeyRef;
     private FirebaseAuth auth;
 
-    String currentUserId,currentUserName,CurrentDate,CurrentTime;
+    String currentUserId,currentUserName,CurrentDate,CurrentTime,current_userID;
 
 
     @Override
@@ -49,15 +50,17 @@ public class GroupChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_group_chat);
 
         String groupName=getIntent().getStringExtra("groupname");
-
+        current_userID=getIntent().getStringExtra("current_userID");
         mtoolbar=findViewById(R.id.groupchatbar);
         setSupportActionBar(mtoolbar);
         getSupportActionBar().setTitle(groupName);
         sendMessage=findViewById(R.id.btn_send);
         userMessageInput=findViewById(R.id.typing_message);
-        displayTextMessage=findViewById(R.id.text_display);
+        displayTextMessage_left=findViewById(R.id.text_display_left);
+        displayTextMessage_right=findViewById(R.id.text_display_right);
 
         scrollView=findViewById(R.id.myscroll);
+
 
         auth=FirebaseAuth.getInstance();
         currentUserId=auth.getCurrentUser().getUid();
@@ -124,15 +127,13 @@ public class GroupChatActivity extends AppCompatActivity {
             String chatName=(String) ((DataSnapshot)iterator.next()).getValue();
             String chatTime=(String) ((DataSnapshot)iterator.next()).getValue();
 
-            if (currentUserId.equals(firebaseUser.getUid())){
-                displayTextMessage.setBackgroundResource(R.drawable.background_right);
+            if (current_userID.equals(firebaseUser.getUid())){
+                displayTextMessage_right.setVisibility(View.VISIBLE);
+                displayTextMessage_right.append(chatName+" :\n"+chatMessage+" :\n"+chatTime+"      "+chatDate+"\n\n\n");
             }else{
-                displayTextMessage.setBackgroundResource(R.drawable.background_left);
+                displayTextMessage_left.setVisibility(View.VISIBLE);
+                displayTextMessage_left.append(chatName+" :\n"+chatMessage+" :\n"+chatTime+"      "+chatDate+"\n\n\n");
             }
-
-            displayTextMessage.append(chatName+" :\n"+chatMessage+" :\n"+chatTime+"      "+chatDate+"\n\n\n");
-
-
             scrollView.fullScroll(ScrollView.FOCUS_DOWN);
 
         }

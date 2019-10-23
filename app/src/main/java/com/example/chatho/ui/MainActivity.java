@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         tabs_access_adpt.addFragment(new Chats_Fragment(),"Chats");
         tabs_access_adpt.addFragment(new Groups_Fragment(),"Groups");
         tabs_access_adpt.addFragment(new Contacts_Fragment(),"Contacts");
+        tabs_access_adpt.addFragment(new Contacts_Fragment(),"Requests");
 
         mviewPager.setAdapter(tabs_access_adpt);
         mtabLayout.setupWithViewPager(mviewPager);

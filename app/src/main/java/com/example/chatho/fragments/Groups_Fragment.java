@@ -16,6 +16,7 @@ import android.widget.ListView;
 
 import com.example.chatho.R;
 import com.example.chatho.ui.GroupChatActivity;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,8 +36,9 @@ public class Groups_Fragment extends Fragment {
     private ListView grouplist;
     private ArrayAdapter<String> arrayAdapter;
     private ArrayList<String> listof_groups=new ArrayList<>();
-
+    private String CurrentUser;
     private DatabaseReference reference;
+    private FirebaseAuth auth;
 
 
     public Groups_Fragment() {
@@ -49,6 +51,8 @@ public class Groups_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.fragment_groups, container, false);
 
+        auth=FirebaseAuth.getInstance();
+        CurrentUser=auth.getCurrentUser().getUid();
         reference= FirebaseDatabase.getInstance().getReference().child("Groups");
 
         grouplist=v.findViewById(R.id.group_list);
@@ -62,6 +66,7 @@ public class Groups_Fragment extends Fragment {
                 String currenyGroupName=adapterView.getItemAtPosition(i).toString();
                 Intent groupintent=new Intent(getContext(), GroupChatActivity.class);
                 groupintent.putExtra("groupname",currenyGroupName);
+                groupintent.putExtra("current_userID",CurrentUser);
                 startActivity(groupintent);
             }
         });

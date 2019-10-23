@@ -1,4 +1,4 @@
-package com.example.chatho.ui;
+package com.example.chatho.pojo;
 
 public class Contacts {
 
