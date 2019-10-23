@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.GroupChatActivity">
+    <include
+        android:id="@+id/groupchatbar"
+        layout="@layout/app_bar"/>
+    <ScrollView
+        android:id="@+id/myscroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/groupchatbar"
+        android:layout_above="@+id/rel">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="2dp">
+            <TextView
+                android:id="@+id/text_display"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="20sp"
+                android:textAllCaps="false"
+                android:text=""
+                android:textColor="#fff"
+                android:background="@drawable/background_right"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="60dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="#fff"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/rel"
+        >
+        <EditText
+            android:id="@+id/typing_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Type a message ... "
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/btn_send"
+            />
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:id="@+id/btn_send"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/send_message"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>
