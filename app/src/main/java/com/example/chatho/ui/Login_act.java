@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.w3c.dom.Text;
 
@@ -28,7 +29,7 @@ public class Login_act extends AppCompatActivity {
     private FirebaseUser currentUser;
     private FirebaseAuth auth;
     private FirebaseDatabase database;
-    private DatabaseReference reference;
+    private DatabaseReference reference,userRef;
 
     private ProgressDialog progressDialog;
 
@@ -36,6 +37,7 @@ public class Login_act extends AppCompatActivity {
     private Button login_bu,phone;
     private EditText email,pass;
     private TextView forget_pass,new_account;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class Login_act extends AppCompatActivity {
         forget_pass=findViewById(R.id.forget_pass);
         new_account=findViewById(R.id.new_account);
         auth=FirebaseAuth.getInstance();
+        userRef=FirebaseDatabase.getInstance().getReference().child("Users");
 
         reference=FirebaseDatabase.getInstance().getReference();
         currentUser=auth.getCurrentUser();
@@ -88,12 +91,22 @@ public class Login_act extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                        if (task.isSuccessful()){
-                           String currentuserID=auth.getCurrentUser().getUid();
-                           reference.child("Users").child(currentuserID).setValue("");
 
-                           SendUserToMainActivity();
-                           progressDialog.dismiss();
+                           String CurrentUserId=auth.getCurrentUser().getUid();
+                           String devicetoken= FirebaseInstanceId.getInstance().getToken();
+                           userRef.child(CurrentUserId).child("device_Tokens")
+                                   .setValue(devicetoken)
+                                   .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                       @Override
+                                       public void onComplete(@NonNull Task<Void> task) {
+                                           if (task.isSuccessful()){
 
+
+                                               SendUserToMainActivity();
+                                               progressDialog.dismiss();
+                                       }
+                                       }
+                                   });
                        }else {
                            progressDialog.dismiss();
                            Toast.makeText(Login_act.this, "" + task.getException(), Toast.LENGTH_SHORT).show();

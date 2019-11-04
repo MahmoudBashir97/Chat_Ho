@@ -6,8 +6,8 @@
     <item
         android:title="Find Friends"
         android:id="@+id/find_friends"
-        app:showAsAction="never">
-
+        app:showAsAction="never"
+        >
     </item>
 
     <item
@@ -20,7 +20,8 @@
     <item
         android:title="Settings"
         android:id="@+id/settings"
-        app:showAsAction="never">
+        app:showAsAction="never"
+        >
 
     </item>
 

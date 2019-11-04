@@ -9,48 +9,43 @@
         android:id="@+id/img"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/chat_icon2"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:scaleType="fitCenter"/>
     <EditText
         android:id="@+id/register_email"
-        android:layout_width="match_parent"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/img"
-        android:layout_alignParentStart="true"
         android:hint="Email..."
         android:inputType="textEmailAddress"
         android:background="@drawable/inputs"
         android:padding="13dp"
         android:layout_marginTop="25dp"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="17dp"/>
+        android:layout_centerHorizontal="true"/>
 
     <EditText
         android:id="@+id/register_pass"
-        android:layout_width="match_parent"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/register_email"
-        android:layout_alignParentStart="true"
         android:hint="Password..."
         android:inputType="textPassword"
         android:background="@drawable/inputs"
         android:padding="13dp"
         android:layout_marginTop="25dp"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="17dp"/>
+        android:layout_centerHorizontal="true"/>
 
 
     <Button
         android:id="@+id/register_bu"
-        android:layout_width="match_parent"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/register_pass"
         android:padding="4dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="19dp"
-        android:layout_marginRight="19dp"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
         android:textSize="24sp"
         android:text="Signup"
         android:textAllCaps="false"

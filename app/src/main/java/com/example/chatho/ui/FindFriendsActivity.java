@@ -67,7 +67,7 @@ public class FindFriendsActivity extends AppCompatActivity {
                 holder.userName.setText(model.getName());
                 holder.usetstatus.setText(model.getStatus());
 
-                Picasso.get().load(model.getImage()).placeholder(R.drawable.user_icon).into(holder.prof_img);
+                Picasso.get().load(model.getImage()).resize(200,200).centerInside().placeholder(R.drawable.user_icon).into(holder.prof_img);
 
                 holder.itemView.setOnClickListener(view -> {
 
@@ -76,7 +76,6 @@ public class FindFriendsActivity extends AppCompatActivity {
                     Intent intent=new Intent(FindFriendsActivity.this,Profile_friendsActivity.class);
                     intent.putExtra("visit_user_id",visit_user_id);
                     startActivity(intent);
-
 
                 });
 

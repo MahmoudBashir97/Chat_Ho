@@ -3,6 +3,7 @@ package com.example.chatho.ui;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -48,6 +49,8 @@ public class Settings extends AppCompatActivity {
     private StorageReference UserprofileImage;
 
     private ProgressDialog loading;
+    private Toolbar toolbar;
+    private Uri imageuri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,15 @@ public class Settings extends AppCompatActivity {
         status_profile=findViewById(R.id.set_profile_status);
         circleImageView=findViewById(R.id.circle_img);
 
+        toolbar=findViewById(R.id.setting_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setTitle("Account Settings");
+
+
+
+
         auth=FirebaseAuth.getInstance();
         Current_user_ID=auth.getCurrentUser().getUid();
         reference= FirebaseDatabase.getInstance().getReference();
@@ -68,6 +80,8 @@ public class Settings extends AppCompatActivity {
 
         username.setVisibility(View.INVISIBLE);
 
+
+        //select image from Gallery
         circleImageView.setOnClickListener(v ->{
 
             Intent gallery=new Intent();
@@ -77,12 +91,15 @@ public class Settings extends AppCompatActivity {
 
 
         });
+
+        RetrieveUserInfo();
+
         update_bu.setOnClickListener(v ->{
             UpdateSettings();
 
         });
 
-        RetrieveUserInfo();
+
     }
 
     @Override
@@ -90,7 +107,7 @@ public class Settings extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode==Gallerypick && resultCode==RESULT_OK && data!=null){
-            Uri imageuri=data.getData();
+            imageuri=data.getData();
             CropImage.activity()
                     .setGuidelines(CropImageView.Guidelines.ON)
                     .setAspectRatio(1,1)
@@ -113,7 +130,7 @@ public class Settings extends AppCompatActivity {
                 Uri resultUri=result.getUri();
                 StorageReference filepath =UserprofileImage.child(Current_user_ID + ".jpg");
 
-                filepath.putFile(resultUri)
+                filepath.putFile(imageuri)
                         .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
@@ -165,7 +182,7 @@ public class Settings extends AppCompatActivity {
 
                             username.setText(retrieveUserName);
                             status_profile.setText(retrieveUserStatus);
-                            Picasso.get().load(retrieveUserImage).into(circleImageView);
+                            Picasso.get().load(retrieveUserImage).resize(200,200).centerInside().into(circleImageView);
                         }else if((dataSnapshot.exists()) && (dataSnapshot.hasChild("name"))){
 
                             String retrieveUserName=dataSnapshot.child("name").getValue().toString();
@@ -199,11 +216,11 @@ public class Settings extends AppCompatActivity {
             status_profile.setError("Enter your status...");
             status_profile.requestFocus();
         }else{
-            HashMap<String,String> profile_Map=new HashMap<>();
+            HashMap<String,Object> profile_Map=new HashMap<>();
             profile_Map.put("Uid",Current_user_ID);
             profile_Map.put("name",us_name);
             profile_Map.put("status",status);
-            reference.child("Users").child(Current_user_ID).setValue(profile_Map)
+            reference.child("Users").child(Current_user_ID).updateChildren(profile_Map)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

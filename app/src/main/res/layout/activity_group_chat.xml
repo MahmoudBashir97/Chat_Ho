@@ -4,70 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.GroupChatActivity"
-    android:background="#ECEBEB"
-    >
+    tools:context=".ui.GroupChatActivity">
     <include
-        android:id="@+id/groupchatbar"
-        layout="@layout/app_bar"/>
-    <ScrollView
-        android:id="@+id/myscroll"
+        layout="@layout/app_bar"
+        android:id="@+id/groupchatbar" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rec_chat_group"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/groupchatbar"
-        android:layout_above="@+id/rel">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginTop="2dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="2dp"
-                >
-                <TextView
-                    android:id="@+id/text_display_left"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:textSize="18sp"
-                    android:textAllCaps="false"
-                    android:text=""
-                    android:textColor="#fff"
-                    android:background="@drawable/background_left"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginEnd="60dp"
-                    android:visibility="invisible"/>
-            </LinearLayout>
+        android:layout_above="@+id/rel"
+        android:layout_marginBottom="6dp"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="2dp">
-        <TextView
-            android:id="@+id/text_display_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:textSize="18sp"
-            android:textAllCaps="false"
-            android:text=""
-            android:textColor="#fff"
-            android:background="@drawable/background_right"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginEnd="5dp"
-            android:layout_alignParentEnd="true"
-            android:visibility="invisible"
-            />
-        </RelativeLayout>
-
-    </LinearLayout>
-
-    </ScrollView>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -77,13 +27,25 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/rel"
         >
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:id="@+id/btn_send_files"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/send_files"
+
+            />
         <EditText
-            android:id="@+id/typing_message"
+            android:id="@+id/input_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Type a message ... "
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/btn_send"
+            android:layout_toStartOf="@+id/btn_send"
+            android:maxLines="5"
+            android:padding="10dp"
+            android:layout_toEndOf="@+id/btn_send_files"
             />
         <ImageButton
             android:layout_width="45dp"
@@ -94,5 +56,6 @@
             android:background="@drawable/send_message"
             />
     </RelativeLayout>
+
 
 </RelativeLayout>

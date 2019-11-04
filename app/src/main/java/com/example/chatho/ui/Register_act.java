@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class Register_act extends AppCompatActivity {
     private FirebaseUser currentUser;
@@ -73,6 +74,16 @@ public class Register_act extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                        if (task.isSuccessful()){
+
+                           String devicetoken= FirebaseInstanceId.getInstance().getToken();
+
+
+                           String currentuserID=auth.getCurrentUser().getUid();
+                           reference.child("Users").child(currentuserID).setValue("");
+
+                           reference.child("Users").child(currentuserID).child("device_Tokens")
+                                   .setValue(devicetoken);
+
                            SendUserToMainActivity();
                            Toast.makeText(Register_act.this, "register success", Toast.LENGTH_SHORT).show();
                            progressDialog.dismiss();
@@ -98,6 +109,8 @@ public class Register_act extends AppCompatActivity {
         startActivity(i);
         finish();
     }
+
+
     private void Check_empty_inputs(){
         String e_m=email.getText().toString();
         String pa_ss=pass.getText().toString();

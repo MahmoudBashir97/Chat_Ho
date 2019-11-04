@@ -11,10 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.chatho.R;
 import com.example.chatho.pojo.Contacts;
+import com.example.chatho.ui.FindFriendsActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,6 +41,8 @@ public class Contacts_Fragment extends Fragment {
     private DatabaseReference ContRef,UserRef;
     private FirebaseAuth auth;
     private String currentUserId;
+
+
     public Contacts_Fragment() {
         // Required empty public constructor
     }
@@ -55,12 +60,15 @@ public class Contacts_Fragment extends Fragment {
         currentUserId=auth.getCurrentUser().getUid();
         ContRef= FirebaseDatabase.getInstance().getReference().child("Contacts").child(currentUserId);
         UserRef= FirebaseDatabase.getInstance().getReference().child("Users");
+
         return v;
     }
 
     @Override
     public void onStart() {
         super.onStart();
+
+
         FirebaseRecyclerOptions options=
                 new FirebaseRecyclerOptions.Builder<Contacts>()
                 .setQuery(ContRef,Contacts.class)
@@ -75,6 +83,26 @@ public class Contacts_Fragment extends Fragment {
                         UserRef.child(userIDs).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                                if (dataSnapshot.exists()){
+
+
+                                    if (dataSnapshot.child("userState").hasChild("state")){
+                                        String state=dataSnapshot.child("userState").child("state").getValue().toString();
+                                        String date=dataSnapshot.child("userState").child("date").getValue().toString();
+                                        String time=dataSnapshot.child("userState").child("time").getValue().toString();
+
+                                        if (state.equals("online")){
+                                            holder.user_online.setVisibility(View.VISIBLE);
+                                        }else if (state.equals("offline")){
+                                            holder.user_online.setVisibility(View.INVISIBLE);
+                                        }
+                                    }else{
+                                          holder.user_online.setVisibility(View.INVISIBLE);
+                                    }
+
+
                                 if (dataSnapshot.hasChild("image")){
                                     String proImage=dataSnapshot.child("image").getValue().toString();
                                     String proStatus=dataSnapshot.child("status").getValue().toString();
@@ -83,9 +111,8 @@ public class Contacts_Fragment extends Fragment {
                                     holder.userName.setText(username);
                                     holder.userStatus.setText(proStatus);
 
-                                    Picasso.get().load(proImage).placeholder(R.drawable.user_icon).into(holder.prof_img);
+                                    Picasso.get().load(proImage).resize(200,200).centerInside().placeholder(R.drawable.user_icon).into(holder.prof_img);
                                 }else {
-                                    String proImage=dataSnapshot.child("image").getValue().toString();
                                     String proStatus=dataSnapshot.child("status").getValue().toString();
                                     String username=dataSnapshot.child("name").getValue().toString();
 
@@ -93,7 +120,7 @@ public class Contacts_Fragment extends Fragment {
                                     holder.userStatus.setText(proStatus);
                                 }
                             }
-
+                            }
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -104,8 +131,9 @@ public class Contacts_Fragment extends Fragment {
                     @NonNull
                     @Override
                     public contactsviewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                        View v=LayoutInflater.from(parent.getContext()).inflate(R.layout.users_display,parent,false);
-                        return  new contactsviewHolder(v);
+                        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.users_display,parent,false);
+                        contactsviewHolder viewHolder=new contactsviewHolder(v);
+                        return  viewHolder;
                     }
                 };
         recyclerView.setAdapter(adapter);
@@ -115,12 +143,14 @@ public class Contacts_Fragment extends Fragment {
 
         TextView userName,userStatus;
         CircleImageView prof_img;
+        ImageView user_online;
         public contactsviewHolder(@NonNull View itemView) {
             super(itemView);
 
             userName=itemView.findViewById(R.id.user_prof_name);
             userStatus=itemView.findViewById(R.id.user_prof_status);
             prof_img=itemView.findViewById(R.id.users_prof_img);
+            user_online=itemView.findViewById(R.id.user_online);
         }
     }
 }
