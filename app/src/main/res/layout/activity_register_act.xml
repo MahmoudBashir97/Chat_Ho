@@ -4,67 +4,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Register_act">
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:src="@drawable/chat_icon2"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:scaleType="fitCenter"/>
-    <EditText
-        android:id="@+id/register_email"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/img"
-        android:hint="Email..."
-        android:inputType="textEmailAddress"
-        android:background="@drawable/inputs"
-        android:padding="13dp"
-        android:layout_marginTop="25dp"
-        android:layout_centerHorizontal="true"/>
+    tools:context=".ui.Register_act"
+    android:background="#02205C">
+   <TextView
+       android:id="@+id/txt_sign"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Sign up"
+       android:textSize="30sp"
+       android:textColor="#ffffff"
+       android:layout_centerHorizontal="true"
+       android:layout_marginTop="50dp"
+       android:layout_marginBottom="20dp"
+       android:textStyle="bold"/>
 
-    <EditText
-        android:id="@+id/register_pass"
-        android:layout_width="320dp"
+    <RelativeLayout
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/register_email"
-        android:hint="Password..."
-        android:inputType="textPassword"
-        android:background="@drawable/inputs"
-        android:padding="13dp"
-        android:layout_marginTop="25dp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerInParent="true"
+        android:padding="40dp"
+        android:background="@drawable/bck_grr"
+        android:id="@+id/rl">
+
+        <EditText
+            android:id="@+id/register_email"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:hint="Email..."
+            android:inputType="textEmailAddress"
+            android:padding="13dp"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="#02205C"/>
+
+        <EditText
+            android:id="@+id/register_pass"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/register_email"
+            android:hint="Password..."
+            android:inputType="textPassword"
+            android:padding="13dp"
+            android:layout_marginTop="25dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="#02205C"/>
 
 
-    <Button
-        android:id="@+id/register_bu"
-        android:layout_width="330dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/register_pass"
-        android:padding="4dp"
-        android:layout_marginTop="15dp"
-        android:layout_centerHorizontal="true"
-        android:textSize="24sp"
-        android:text="Signup"
-        android:textAllCaps="false"
-        android:textColor="#fff"
-        android:background="@drawable/buttons"
-        />
+        <Button
+            android:id="@+id/register_bu"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/register_pass"
+            android:padding="4dp"
+            android:layout_marginTop="25dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="24sp"
+            android:text="Signup"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:background="@drawable/buttons"
+            />
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/already_have_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/register_bu"
-        android:text="Already have an account?"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="2dp"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="2dp"
         android:layout_marginRight="23dp"
+        android:text="Already have an account?"
+        android:layout_below="@+id/rl"
+        android:textAlignment="center"
+        android:textColor="#fff"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:textColor="#02205C"
-        android:textAlignment="center"/>
+        />
 
 </RelativeLayout>

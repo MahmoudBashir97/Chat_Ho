@@ -5,7 +5,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.0"
     defaultConfig {
-        applicationId "com.example.chatho"
+        applicationId "com.chatho.chatho"
         minSdkVersion 18
         targetSdkVersion 29
         versionCode 1
@@ -40,6 +40,16 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.+'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.android.volley:volley:1.1.0'
 
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.github.arturogutierrez:badges:1.0.5'
+    implementation 'com.txusballesteros:bubbles:1.2.1'
+    implementation 'com.nex3z:notification-badge:0.2.0'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+
+    implementation 'com.google.code.gson:gson:2.8.2'
+
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
 }

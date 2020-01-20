@@ -85,4 +85,20 @@
     </LinearLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/count_mess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttons"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:layout_marginRight="20dp"
+        android:text="550"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#fff"
+        android:gravity="center_horizontal"
+        android:visibility="gone"
+        />
 </RelativeLayout>

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.PhoneLoginActivity">
+    tools:context=".ui.PhoneLoginActivity"
+    android:background="#fff">
     <EditText
         android:id="@+id/ph_number"
         android:layout_width="match_parent"
@@ -13,7 +14,7 @@
         android:layout_marginStart="17dp"
         android:layout_marginEnd="17dp"
         android:layout_marginTop="180dp"
-        android:background="@drawable/inputs"
+        android:background="@drawable/sec_input_bck"
         android:padding="15dp"
         android:hint="write Phone number here..."
         android:textAllCaps="false"
@@ -21,6 +22,8 @@
         android:textAlignment="center"
         android:textStyle="bold"
         android:inputType="phone"
+        android:textColor="#02205C"
+        android:textColorHint="#02205C"
         />
 
     <EditText
@@ -31,7 +34,7 @@
         android:layout_marginStart="17dp"
         android:layout_marginEnd="17dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/inputs"
+        android:background="@drawable/sec_input_bck"
         android:padding="15dp"
         android:hint="write Verification code here..."
         android:textAllCaps="false"
@@ -40,6 +43,8 @@
         android:textStyle="bold"
         android:layout_below="@+id/ph_number"
         android:visibility="invisible"
+        android:textColor="#02205C"
+        android:textColorHint="#02205C"
         />
     <Button
         android:id="@+id/send_verify_code"
@@ -57,7 +62,6 @@
         android:textSize="18sp"
         android:textAllCaps="false"
         />
-
     <Button
         android:id="@+id/verify_bu"
         android:layout_width="match_parent"

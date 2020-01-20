@@ -1,44 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.chatho">
+    package="com.chatho.chatho">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <!-- Samsung -->
+    <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
+    <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" />
+
+    <!-- Sony -->
+    <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE" />
+
+    <!-- HTC -->
+    <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT" />
+
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_foreground"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.ImageViewerActivity"/>
+
+
+
+        <receiver android:name="com.chatho.chatho.Services.Fcm.MyReceiver" />
+
+        <service android:name="com.chatho.chatho.Services.Fcm.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name="com.chatho.chatho.Services.Fcm.MyFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name="com.chatho.chatho.ui.ImageViewerActivity" />
         <activity
-            android:name=".ui.Sett"
-            android:parentActivityName=".ui.MainActivity" />
-        <activity android:name=".ui.Chat_Activity"
-            android:parentActivityName=".ui.MainActivity"/>
-        <activity android:name=".ui.Profile_friendsActivity" />
+            android:name="com.chatho.chatho.ui.Sett"
+            android:parentActivityName="com.chatho.chatho.ui.MainActivity" />
         <activity
-            android:name=".ui.FindFriendsActivity"
-            android:parentActivityName=".ui.MainActivity" />
-        <activity android:name=".ui.PhoneLoginActivity" />
-        <activity android:name=".ui.GroupChatActivity" />
+            android:name="com.chatho.chatho.ui.Chat_Activity"
+            android:parentActivityName="com.chatho.chatho.ui.MainActivity" />
+        <activity android:name="com.chatho.chatho.ui.Profile_friendsActivity" />
         <activity
-            android:name=".ui.Settings"
-            android:parentActivityName=".ui.MainActivity" />
-        <activity android:name=".ui.Register_act" />
-        <activity android:name=".ui.Login_act">
+            android:name="com.chatho.chatho.ui.FindFriendsActivity"
+            android:parentActivityName="com.chatho.chatho.ui.MainActivity" />
+        <activity android:name="com.chatho.chatho.ui.PhoneLoginActivity" />
+        <activity android:name="com.chatho.chatho.ui.GroupChatActivity" />
+        <activity
+            android:name="com.chatho.chatho.ui.Settings"
+            android:parentActivityName="com.chatho.chatho.ui.MainActivity" />
+        <activity android:name="com.chatho.chatho.ui.Register_act" />
+        <activity android:name="com.chatho.chatho.ui.Login_act">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.MainActivity">
+        <activity android:name="com.chatho.chatho.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>

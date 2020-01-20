@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:386712048591:android:7c6e37ca0013f22c",
+        "mobilesdk_app_id": "1:386712048591:android:3fa74686616a4b2779f8ba",
         "android_client_info": {
-          "package_name": "com.example.chat_app"
+          "package_name": "com.chatho.chatho"
         }
       },
       "oauth_client": [
         {
-          "client_id": "386712048591-eqss9v21hd4ie04pjhdplth78ecj3bu5.apps.googleusercontent.com",
+          "client_id": "386712048591-fsbl8ka2n69u8btvtjnpcb0hc934uun0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.chat_app",
+            "package_name": "com.chatho.chatho",
             "certificate_hash": "f6f0330153c80be4f6a659c6430f64ce443e6d7a"
           }
         },
@@ -45,17 +45,17 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:386712048591:android:86c7f6da0fabd26e79f8ba",
+        "mobilesdk_app_id": "1:386712048591:android:7c6e37ca0013f22c",
         "android_client_info": {
-          "package_name": "com.example.chatho"
+          "package_name": "com.example.chat_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "386712048591-lgbpuc6egebkqfhsuiap0ge2bchb044v.apps.googleusercontent.com",
+          "client_id": "386712048591-eqss9v21hd4ie04pjhdplth78ecj3bu5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.chatho",
+            "package_name": "com.example.chat_app",
             "certificate_hash": "f6f0330153c80be4f6a659c6430f64ce443e6d7a"
           }
         },
