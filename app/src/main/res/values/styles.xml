@@ -8,11 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="android:itemBackground">#1176CE</item>
+
     </style>
 
     <style name="AlertDialog" parent="Theme.AppCompat.Light.Dialog">
 
     </style>
-
 
 </resources>

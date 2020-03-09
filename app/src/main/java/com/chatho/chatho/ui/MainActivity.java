@@ -5,7 +5,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,7 +30,9 @@ import com.chatho.chatho.fragments.Tabs_access_adpt;
 import com.chatho.chatho.pojo.notifymodel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference reference;
     private String CurrentUserID;
     notifymodel model;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,9 +75,10 @@ public class MainActivity extends AppCompatActivity {
         tabs_access_adpt.addFragment(new Groups_Fragment(),"Groups");
         tabs_access_adpt.addFragment(new Contacts_Fragment(),"Contacts");
         //tabs_access_adpt.addFragment(new RequestFragment(),"Requests");
-        tabs_access_adpt.addFragment(new Status_Fragment(),"Status");
+        tabs_access_adpt.addFragment(new Status_Fragment(),"Story");
 
         mviewPager.setAdapter(tabs_access_adpt);
+
         mtabLayout.setupWithViewPager(mviewPager);
 
         model=new notifymodel();
@@ -171,6 +177,9 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.create_group){
             RequestNewgroup();
 
+        }
+        if (item.getItemId() == R.id.Requests){
+            startActivity(new Intent(MainActivity.this,Requests_Activity.class));
         }
         return true;
     }

@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.Chats_Fragment">
+    tools:context=".fragments.Chats_Fragment"
+    android:background="#fff">
 
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/chats_list"
@@ -29,5 +30,6 @@
        app:maxImageSize="50dp"
        android:clickable="true"
        android:focusable="true"
+       app:elevation="9dp"
        />
 </RelativeLayout>

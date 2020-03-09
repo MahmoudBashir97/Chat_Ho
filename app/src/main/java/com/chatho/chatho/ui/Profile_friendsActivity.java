@@ -2,11 +2,13 @@ package com.chatho.chatho.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chatho.chatho.Api_Interface.api_Interface;
@@ -34,7 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Profile_friendsActivity extends AppCompatActivity {
 
-    CircleImageView userprofileImage;
+    ImageView userprofileImage;
     TextView username, userStatus;
     Button SendMaessage,cancelmessagerequest;
 
@@ -43,11 +45,15 @@ public class Profile_friendsActivity extends AppCompatActivity {
     String reciever_user_id, Current_state, sender_UserId,device_Tokens,SenderName;
     String BaseURL="https://fcm.googleapis.com/";
     send storeReq;
+    Toolbar profile_toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_friends);
 
+        profile_toolbar=findViewById(R.id.profile_toolbar);
+        setSupportActionBar(profile_toolbar);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back);
 
         reciever_user_id = getIntent().getStringExtra("visit_user_id");
         device_Tokens=getIntent().getStringExtra("device_Tokens");
@@ -84,7 +90,7 @@ public class Profile_friendsActivity extends AppCompatActivity {
                     String userName = dataSnapshot.child("name").getValue().toString();
                     String user_Status = dataSnapshot.child("status").getValue().toString();
 
-                    Picasso.get().load(userImage).resize(200,200).centerInside().placeholder(R.drawable.user_icon).into(userprofileImage);
+                    Picasso.get().load(userImage).placeholder(R.drawable.user_icon).into(userprofileImage);
                     username.setText(userName);
                     userStatus.setText(user_Status);
 

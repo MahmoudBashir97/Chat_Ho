@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera2.full" />
 
     <!-- Samsung -->
     <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
@@ -48,6 +49,9 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".ui.Requests_Activity"/>
+        <activity android:name=".story_package.Story_Activity"/>
+        <activity android:name=".story_package.Story_camera"/>
         <activity android:name="com.chatho.chatho.ui.ImageViewerActivity" />
         <activity
             android:name="com.chatho.chatho.ui.Sett"

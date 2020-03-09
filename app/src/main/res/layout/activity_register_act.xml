@@ -23,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="40dp"
-        android:background="@drawable/bck_grr"
         android:id="@+id/rl">
 
         <EditText
@@ -35,7 +34,9 @@
             android:padding="13dp"
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
-            android:textColor="#02205C"/>
+            android:textColor="#fff"
+            android:background="#6177F1"
+            android:textColorHint="#FFF"/>
 
         <EditText
             android:id="@+id/register_pass"
@@ -47,7 +48,9 @@
             android:padding="13dp"
             android:layout_marginTop="25dp"
             android:layout_centerHorizontal="true"
-            android:textColor="#02205C"/>
+            android:textColor="#fff"
+            android:background="#6177F1"
+            android:textColorHint="#FFF"/>
 
 
         <Button
@@ -59,7 +62,7 @@
             android:layout_marginTop="25dp"
             android:layout_centerHorizontal="true"
             android:textSize="24sp"
-            android:text="Signup"
+            android:text="Register"
             android:textAllCaps="false"
             android:textColor="#fff"
             android:background="@drawable/buttons"

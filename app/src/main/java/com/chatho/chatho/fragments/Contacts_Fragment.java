@@ -1,6 +1,7 @@
 package com.chatho.chatho.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.chatho.chatho.R;
 import com.chatho.chatho.pojo.Contacts;
+import com.chatho.chatho.ui.Chat_Activity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -107,6 +109,12 @@ public class Contacts_Fragment extends Fragment {
                                     holder.userName.setText(username);
                                     holder.userStatus.setText(proStatus);
 
+                                    holder.itemView.setOnClickListener(v ->{
+                                        Intent n=new Intent(getContext(), Chat_Activity.class);
+                                        n.putExtra("visit_user_id",userIDs);
+                                        startActivity(n);
+                                    });
+
                                     Picasso.get().load(proImage).resize(200,200).centerInside().placeholder(R.drawable.user_icon).into(holder.prof_img);
                                 }else {
                                     String proStatus=dataSnapshot.child("status").getValue().toString();
@@ -114,6 +122,9 @@ public class Contacts_Fragment extends Fragment {
 
                                     holder.userName.setText(username);
                                     holder.userStatus.setText(proStatus);
+
+
+
                                 }
                             }
                             }

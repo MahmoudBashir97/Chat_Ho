@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.chatho.chatho.R;
+import com.chatho.chatho.ViewModel.SharedModel;
 import com.chatho.chatho.pojo.Contacts;
 import com.chatho.chatho.ui.Chat_Activity;
 import com.chatho.chatho.ui.FindFriendsActivity;
@@ -52,6 +54,8 @@ public class Chats_Fragment extends Fragment {
     private FloatingActionButton newchtfr;
     Context context;
 
+    private SharedModel sharedModel;
+
     public Chats_Fragment() {
         // Required empty public constructor
     }
@@ -62,6 +66,8 @@ public class Chats_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_chats, container, false);
+
+        sharedModel= ViewModelProviders.of(this).get(SharedModel.class);
 
         auth=FirebaseAuth.getInstance();
         UID=auth.getCurrentUser().getUid();
@@ -112,7 +118,6 @@ public class Chats_Fragment extends Fragment {
 
                            if (dataSnapshot.exists()){
                                if (dataSnapshot.hasChild("image")){
-                                   chatsHolder.count_mess.setVisibility(View.VISIBLE);
                                    retImag[0] =dataSnapshot.child("image").getValue().toString();
                                    Picasso.get().load(retImag[0]).resize(200,200).centerInside().into(chatsHolder.prof_img);
                                }
@@ -159,6 +164,7 @@ public class Chats_Fragment extends Fragment {
                                            }
                                        }
                                    });
+                                   sharedModel.setText(retName);
                                    startActivity(chatintent);
                                });
 
@@ -176,7 +182,7 @@ public class Chats_Fragment extends Fragment {
                     @Override
                     public chatsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-                       View v=LayoutInflater.from(parent.getContext()).inflate(R.layout.users_display,parent,false);
+                       View v=LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_fragment,parent,false);
                         return new chatsHolder(v);
                     }
                 };
@@ -194,11 +200,9 @@ public class Chats_Fragment extends Fragment {
         public chatsHolder(@NonNull View itemView) {
 
             super(itemView);
-
             prof_img=itemView.findViewById(R.id.users_prof_img);
             username=itemView.findViewById(R.id.user_prof_name);
             status=itemView.findViewById(R.id.user_prof_status);
-            count_mess=itemView.findViewById(R.id.count_mess);
         }
     }
 }

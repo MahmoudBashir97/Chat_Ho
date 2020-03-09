@@ -4,6 +4,7 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/nlr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
@@ -20,8 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -86,19 +85,12 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/count_mess"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/buttons"
-        android:layout_alignParentEnd="true"
-        android:layout_centerInParent="true"
-        android:layout_marginRight="20dp"
-        android:text="550"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:textColor="#fff"
-        android:gravity="center_horizontal"
-        android:visibility="gone"
+    <View
+        android:layout_width="300dp"
+        android:layout_height="1.2dp"
+        android:background="#D5D5D5"
+        android:layout_below="@+id/nlr"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
         />
 </RelativeLayout>

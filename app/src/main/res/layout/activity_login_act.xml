@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:text="Sign in"
                 android:textSize="30sp"
-                android:textColor="#ffffff"
+                android:textColor="#fff"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="20dp"
@@ -32,7 +32,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/txt_signin"
                 android:layout_marginTop="50dp"
-                android:background="@drawable/bck_grr"
                 android:padding="30dp">
 
             <EditText
@@ -44,7 +43,9 @@
                 android:padding="13dp"
                 android:layout_marginTop="25dp"
                 android:layout_centerHorizontal="true"
-                android:textColor="#02205C"/>
+                android:textColor="#fff"
+                android:background="#6177F1"
+                android:textColorHint="#FFF"/>
 
             <EditText
                 android:id="@+id/login_pass"
@@ -53,10 +54,12 @@
                 android:layout_below="@+id/login_email"
                 android:hint="Password..."
                 android:inputType="textPassword"
-                android:textColor="#02205C"
+                android:textColorHint="#fff"
                 android:padding="13dp"
                 android:layout_marginTop="25dp"
-                android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true"
+                android:textColor="#fff"
+                android:background="#6177F1"/>
 
             <TextView
                 android:id="@+id/forget_pass"
@@ -70,7 +73,7 @@
                 android:layout_marginRight="23dp"
                 android:textSize="15sp"
                 android:textStyle="normal"
-                android:textColor="#0440B8"
+                android:textColor="#fff"
                 android:textAlignment="textEnd"/>
             </RelativeLayout>
 
@@ -80,7 +83,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/ler"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/bck_grr2"
                 android:padding="30dp">
             <Button
                 android:id="@+id/login_bu"
@@ -107,7 +109,7 @@
                 android:layout_marginRight="23dp"
                 android:textSize="16sp"
                 android:textStyle="normal"
-                android:textColor="#0440B8"
+                android:textColor="#fff"
                 android:textAlignment="center"/>
 
             <TextView
@@ -122,7 +124,7 @@
                 android:layout_marginRight="23dp"
                 android:textSize="16sp"
                 android:textStyle="normal"
-                android:textColor="#0440B8"
+                android:textColor="#fff"
                 android:textAlignment="center"/>
 
             <Button

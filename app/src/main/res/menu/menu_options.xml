@@ -3,6 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
+
+    <item
+        android:title="Requests"
+        android:id="@+id/Requests"
+        app:showAsAction="never"
+        >
+    </item>
+
     <item
         android:title="Find Friends"
         android:id="@+id/find_friends"
