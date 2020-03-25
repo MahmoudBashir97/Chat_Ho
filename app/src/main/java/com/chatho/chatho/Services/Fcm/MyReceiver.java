@@ -37,6 +37,7 @@ public class MyReceiver extends BroadcastReceiver {
                                     .putExtra("senderId", senderId)
                                     .putExtra("senderName", senderName)
                                     .putExtra("message", message)
+                                    .putExtra("visit_user_id",receiverId)
                                     //.putExtra("image",image)
                                     .putExtra("countbadge",countbadge)
                                     .addFlags(FLAG_ACTIVITY_NEW_TASK));

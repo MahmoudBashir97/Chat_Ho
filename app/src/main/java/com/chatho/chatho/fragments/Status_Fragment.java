@@ -51,9 +51,13 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -358,8 +362,11 @@ public class Status_Fragment extends Fragment {
                         // }
                         //}
                         // }
+                        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                        String currentTime = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
 
-                        stories=new Stories(CurrentUID,""+count,""+muri,true,""+count);
+
+                        stories=new Stories(CurrentUID,""+count,""+muri,true,""+count,currentTime,currentDate);
 
                         stories_ref.child(CurrentUID).child(""+count).setValue(stories);
                         story_to_friends.child("Friends").child(CurrentUID).child(""+count).setValue(stories);

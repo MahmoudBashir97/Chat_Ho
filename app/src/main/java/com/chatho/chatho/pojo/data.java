@@ -8,14 +8,16 @@ public class data {
     private String message;
     private String imageReceiver;
     private String countbadge;
+    private String request;
 
-    public data(String senderId, String senderName, String receiverId, String message, String imageReceiver, String countbadge) {
+    public data(String senderId, String senderName, String receiverId, String message, String imageReceiver, String countbadge,String request) {
         this.senderId = senderId;
         this.senderName = senderName;
         this.receiverId = receiverId;
         this.message = message;
         this.imageReceiver = imageReceiver;
         this.countbadge = countbadge;
+        this.request=request;
     }
 
     public String getSenderId() {
@@ -64,5 +66,13 @@ public class data {
 
     public void setCountbadge(String countbadge) {
         this.countbadge = countbadge;
+    }
+
+    public String getRequest() {
+        return request;
+    }
+
+    public void setRequest(String request) {
+        this.request = request;
     }
 }

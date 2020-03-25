@@ -10,12 +10,15 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +37,7 @@ import com.chatho.chatho.Api_Interface.api_Interface;
 import com.chatho.chatho.Notification.Exampleservice;
 import com.chatho.chatho.R;
 import com.chatho.chatho.Services.MySingleton;
+import com.chatho.chatho.background_alarm.Alarm_getting_firebase_data;
 import com.chatho.chatho.pojo.Messages;
 import com.chatho.chatho.pojo.data;
 import com.chatho.chatho.pojo.notifymodel;
@@ -153,6 +157,7 @@ public class Chat_Activity extends AppCompatActivity {
         countbadgeRef=FirebaseDatabase.getInstance().getReference().child("countbadge");
 
 
+        // get Intent data
         messageRecieverID=getIntent().getStringExtra("visit_user_id");
         messageRecieverName=getIntent().getStringExtra("visit_user_name");
         messageRecieverImage=getIntent().getStringExtra("visit_image");
@@ -562,7 +567,7 @@ public class Chat_Activity extends AppCompatActivity {
         {
             countbadge++;
 
-            data stored=new data(messageSenderID,myname,messageRecieverID,messageText,messageRecieverImage ,""+countbadge);
+            data stored=new data(messageSenderID,myname,messageRecieverID,messageText,messageRecieverImage ,""+countbadge,"message");
             send data_send=new send(user_Token,stored);
             Call<send> sendCall=iterfaceCall.storedata(data_send);
             sendCall.enqueue(new Callback<send>() {
@@ -623,6 +628,25 @@ public class Chat_Activity extends AppCompatActivity {
 
             DatatoFirebaseTobeNotified(messageText);
             notifymodel Notify=new notifymodel(myname,messageText,messageRecieverID,messageSenderID);
+
+
+            AlarmManager manager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
+            Intent myintent;
+            PendingIntent pendingIntent;
+
+            myintent=new Intent(Chat_Activity.this, Alarm_getting_firebase_data.class);
+            myintent.putExtra("message",messageText);
+            myintent.putExtra("Sender_ID",messageSenderID);
+            myintent.putExtra("Receiver_ID",messageRecieverID);
+            myintent.putExtra("message_date",saveCurrentDate);
+            myintent.putExtra("message_time",saveCurrentTime);
+
+
+            pendingIntent=PendingIntent.getBroadcast(this,0,myintent,0);
+
+            if (!messageSenderID.equals(messageRecieverID)){
+            manager.set(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime()+1000,pendingIntent);}
+
 
         }
     }

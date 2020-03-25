@@ -49,7 +49,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.d(LOG_TAG, "onMessageReceived: ");
         String request = remoteMessage.getData().get("request");
 
-        if (remoteMessage.getData().equals("message")){
+        if (remoteMessage.getData().get("request").equals("message")){
 
             String senderId = remoteMessage.getData().get("senderId");
             String senderName = remoteMessage.getData().get("senderName");
@@ -61,7 +61,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             handleInviteIntent(senderId, senderName,receiverId,message,countbadge);
 
-            initBubble();
+            //initBubble();
         }
 
         if (request.equals("req")){
@@ -69,7 +69,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             String senderId = remoteMessage.getData().get("senderId");
             String senderName = remoteMessage.getData().get("senderName");
             SendRequestChat(senderId,senderName);
-
         }
     }
 
@@ -123,14 +122,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .build();
 
 
-        addNewBubble();
+        //addNewBubble();
 
-        try {
+        /*try {
 
             Badges.setBadge(this,count);
         } catch (BadgesNotSupportedException e) {
             Log.d("Error", e.getMessage());
-        }
+        }*/
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,11 +27,12 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import jp.shts.android.storiesprogressview.StoriesProgressView;
 
 public class Story_Activity extends AppCompatActivity implements StoriesProgressView.StoriesListener {
 
-    private DatabaseReference stories_ref;
+    private DatabaseReference stories_ref,user_Info;
     private FirebaseAuth auth;
     private String UID="";
     private static final int PROGRESS_COUNT = 6;
@@ -59,6 +61,13 @@ public class Story_Activity extends AppCompatActivity implements StoriesProgress
     long pressTime = 0L;
     long limit = 500L;
 
+
+    CircleImageView st_img;
+    TextView st_name,st_time;
+    ImageView back_forward;
+
+
+
     private View.OnTouchListener onTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
@@ -83,7 +92,13 @@ public class Story_Activity extends AppCompatActivity implements StoriesProgress
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        st_img =findViewById(R.id.st_img);
+        st_name=findViewById(R.id.st_name);
+        st_time=findViewById(R.id.st_time);
+        back_forward=findViewById(R.id.back_forward);
+
         stories_ref= FirebaseDatabase.getInstance().getReference().child("Stories");
+        user_Info=FirebaseDatabase.getInstance().getReference().child("Users");
         auth=FirebaseAuth.getInstance();
        // CurrentUID=auth.getCurrentUser().getUid();
         UID=getIntent().getStringExtra("UID");
@@ -108,10 +123,9 @@ public class Story_Activity extends AppCompatActivity implements StoriesProgress
 
                     stories=snapshot.getValue(Stories.class);
                     count= Integer.parseInt(snapshot.child("count").getValue().toString());
+                    st_time.setText(snapshot.child("time").getValue().toString());
                     storiesList.add(stories);
                 }
-
-                Toast.makeText(Story_Activity.this, ""+count, Toast.LENGTH_SHORT).show();
 
                 storiesProgressView.setStoriesCount(count);
                 storiesProgressView.setStoryDuration(4000L);
@@ -136,9 +150,29 @@ public class Story_Activity extends AppCompatActivity implements StoriesProgress
 
             }
         });
+        user_Info.child(UID).addValueEventListener(new ValueEventListener() {
+                                                       @Override
+                                                       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                           String imguri=dataSnapshot.child("image").getValue().toString();
+                                                           String name=dataSnapshot.child("name").getValue().toString();
+                                                           Picasso.get().load(imguri).resize(50,70).centerInside().into(st_img);
+                                                           st_name.setText(name);
+                                                       }
 
-        // bind reverse view
-        View reverse = findViewById(R.id.reverse);
+                                                       @Override
+                                                       public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                       }
+                                                   });
+
+
+        back_forward.setOnClickListener(v ->{
+            onComplete();
+        });
+
+
+                // bind reverse view
+                View reverse = findViewById(R.id.reverse);
         reverse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

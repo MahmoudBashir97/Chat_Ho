@@ -6,17 +6,38 @@ public class Stories {
     private String ImageURI;
     private boolean add;
     private String randomId;
+    private String time;
+    private String date;
+
 
 
     public Stories() {
     }
 
-    public Stories(String Id,String count, String imageURI, boolean add ,String randomId) {
-        this.Id=Id;
+    public Stories(String id, String count, String imageURI, boolean add, String randomId, String time, String date) {
+        Id = id;
         this.count = count;
         ImageURI = imageURI;
         this.add = add;
-        this.randomId=randomId;
+        this.randomId = randomId;
+        this.time = time;
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getCount() {
