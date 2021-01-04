@@ -3,6 +3,7 @@ package com.chatho.chatho.ui;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -62,7 +63,6 @@ public class PhoneLoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         String phone=phone_num.getText().toString();
-
 
 
         send_verify.setOnClickListener(view -> {
@@ -155,7 +155,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
                 number,
                 60,
                 TimeUnit.SECONDS,
-                TaskExecutors.MAIN_THREAD,
+                (Activity) TaskExecutors.MAIN_THREAD,
                 mCallBack);
     }
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallBack=new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
